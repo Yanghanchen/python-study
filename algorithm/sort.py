@@ -1,4 +1,4 @@
-import math
+import math,random
 
 def bucket_sort(l,bucketSize=5):
     minValue = min(l)
@@ -62,11 +62,14 @@ def heap_sort(l):
         print(l)
     return l
 
-def quick_sort(l,left,right):
+def quick_sort(l,left,right,random=False):
     if left < right:
-        partitionIndex = partition(l,left,right)
-        quick_sort(l,left,partitionIndex-1)
-        quick_sort(l,partitionIndex+1,right)
+        if random:
+            partitionIndex = partition(l,left,right)
+        else:
+            partitionIndex = randomPartition(l,left,right)
+        quick_sort(l,left,partitionIndex-1,random)
+        quick_sort(l,partitionIndex+1,right,random)
     return l
 
 def partition(l,left,right):
@@ -79,6 +82,11 @@ def partition(l,left,right):
     swap(l,index-1,pivot)
     print(l)
     return index - 1
+
+def randomPartition(l,left,right):
+    pivot = random.randint(left,right)
+    swap(l,left,pivot)
+    return partition(l,left,right)
 
 def shell_sort(l):
     length = len(l)
