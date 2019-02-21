@@ -1,5 +1,26 @@
 import math,random
 
+def radix_sort(l):
+    bucket = []
+    maxValue = max(l)
+    count = len(str(maxValue))
+    mod = 10
+    dev = 1
+    for i in range(1,count+1):
+        for j in range(mod+1):
+            bucket.append([])
+        for j in l:
+            bucket[math.floor((j%mod)/dev)].append(j)
+        l.clear()
+        for k in range(len(bucket)):
+            if len(bucket[k])>0:
+                l += bucket[k]
+        mod *= 10
+        dev *= 10
+        bucket.clear()
+        print(l)
+    return l
+
 def bucket_sort(l,bucketSize=5):
     minValue = min(l)
     bucket = []
@@ -153,10 +174,10 @@ def merge(left,right):
                 left.pop(0)
     if left != None:
         while len(left)>0:
-            result.append(left.pop())
+            result.append(left.pop(0))
     if right != None:
         while len(right)>0:
-            result.append(right.pop())
+            result.append(right.pop(0))
     return result
 
 def swap(arr,i,j):
@@ -165,6 +186,7 @@ def swap(arr,i,j):
     arr[j] = tmp
 
 sample = [5,2,4,6,1,3]
+sample2 = [329,457,657,839,436,720,355]
 #insertion_sort(sample)
 #print(merge_sort(sample))
 #bubble_sort(sample)
@@ -174,3 +196,4 @@ sample = [5,2,4,6,1,3]
 #heap_sort(sample)
 #print(count_sort(sample))
 #print(bucket_sort(sample,2))
+#radix_sort(sample2)
